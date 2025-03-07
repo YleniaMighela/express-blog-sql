@@ -1,0 +1,21 @@
+{
+  "name": "express-blog-sql",
+  "version": "1.0.0",
+  "description": "express e sql",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YleniaMighela/express-blog-sql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YleniaMighela/express-blog-sql/issues"
+  },
+  "homepage": "https://github.com/YleniaMighela/express-blog-sql#readme"
+}
