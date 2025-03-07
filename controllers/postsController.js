@@ -168,43 +168,21 @@ function modify(req, res) {
 }
 
 
-// delete
+// DESTROY 
 //  DELETE rimuovo un elemento posts/:id
 function destroy(req, res) {
-    // res.send('Eliminazione del post  con codice numero ' + req.params.id);
 
     // salviamo in una costante il valore dell'id, forzandolo in un numero
     const id = parseInt(req.params.id);
 
+    // salvo la query in una costante
+    const sql = 'DELETE FROM posts WHERE id = ?'
 
-    // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
-    const postId = dataPosts.find(postId => postId.id === id);
-
-    // Facciamo il controllo
-    if (!postId) {
-
-        // ritorno lo stato di errore 404, non trovato
-        res.status(404);
-
-        // ritorno un messaggio di errore (formato json)
-        return res.json({
-            error: "Not Found",
-            message: "Pizza non trovata"
-        })
-    }
-
-
-    // attraverso il metodo splice elimino l'elemento indicato
-    dataPosts.splice(dataPosts.indexOf(postId), 1);
-
-
-    // ritorno della risposta su postman della cancellazione avvenuta
-    res.sendStatus(204);
-
-
-    // controllo sul terminale l'array aggiornata
-    console.log(dataPosts);
-
+    //Eseguo la query eliminando il post 
+    connection.query(sql, [id], (err) => {
+        if (err) return res.status(500).json({ error: 'Failed to delete post' });
+        res.sendStatus(204)
+    });
 
 }
 
