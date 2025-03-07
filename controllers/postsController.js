@@ -23,30 +23,20 @@ function index(req, res) {
 // show
 // GET visualizzo un unico elemento posts/:id
 function show(req, res) {
-    // res.send('Dettagli del post con codice numero ' + req.params.id);
+    ;
 
     // salviamo in una costante il valore dell'id, forzandolo in un numero
     const id = parseInt(req.params.id);
 
+    // mi salvo in una costante la query
+    const sql = 'SELECT * FROM posts WHERE id = ?';
 
-    // cerco attraverso il metodo find la proprietà id dell'oggetto dell'array
-    const postId = dataPosts.find(postId => postId.id === id);
-
-    // Facciamo il controllo
-    if (!postId) {
-
-        // ritorno lo stato di errore 404, non trovato
-        res.status(404);
-
-        // ritorno un messaggio di errore (formato json)
-        return res.json({
-            error: "Not Found",
-            message: "Pizza non trovata"
-        })
-    }
-
-    // restituisco il formato JSON
-    res.json(postId)
+    // eseguo la query
+    connection.query(sql, [id], (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        if (results.length === 0) return res.status(404).json({ error: 'Post not found' });
+        res.json(results[0]);
+    });
 };
 
 
