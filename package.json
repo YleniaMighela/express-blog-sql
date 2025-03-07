@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/YleniaMighela/express-blog-sql#readme",
   "dependencies": {
-    "axios": "^1.8.2"
+    "axios": "^1.8.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
   }
 }
