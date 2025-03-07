@@ -1,25 +1,20 @@
-// mi salvo in una costante l'array dei post
-const dataPosts = require('../data/posts');
 
-// index 
+// Importo il file che mi permette di connettermi al db
+const connection = require('../data/db');
+
+// INDEX
 // GET visualizzo tutti gli elementi posts/
+
 function index(req, res) {
-    // res.send('Lista dei post');
 
-    // gestione errore del Server
-    // variabile;
+    // salvo la query in una costante
+    const sql = 'SELECT * FROM posts';
 
-
-    // inizialmente il posts filtrato sarà uguale a quello dell'array originale
-    let filteredPosts = dataPosts;
-    // successivamente se la richiesta contiene un filtro, filtriamo i post attraverso la proprietà tag
-    if (req.query.tags) {
-        filteredPosts = dataPosts.filter(
-            post => post.tags.includes(req.query.tags)
-        );
-    }
-    // restituiamo la variabile filteredPosts
-    res.json(filteredPosts);
+    // eseguo la query
+    connection.query(sql, (err, results) => {
+        if (err) return res.status(500).json({ error: 'Database query failed' });
+        res.json(results);
+    });
 
 
 
